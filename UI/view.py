@@ -17,12 +17,40 @@ class View(ft.UserControl):
         self.btn_hello = None
         self.txt_result = None
         self.txt_container = None
+        # My elements
+        self.dd_corsi = None
+        self.btn_cerca_iscritti = None
+
+
 
     def load_interface(self):
         """Function that loads the graphical elements of the view"""
         # title
         self._title = ft.Text("Hello World", color="blue", size=24)
         self._page.controls.append(self._title)
+
+        # ====================================================================================================
+
+        # Dropdown "Scegli il corso"
+        self.dd_corsi = ft.Dropdown(
+            label="Corso",
+            hint_text= "Seleziona un corso",
+            width=300
+        )
+        self._controller.load_corsi()
+
+        # Bottone "Cerca iscritti"
+        self.btn_cerca_iscritti = ft.ElevatedButton(
+            text="Cerca iscritti",
+            on_click=self._controller.handle_cerca_iscritti,
+            width=300
+        )
+
+        row_high = ft.Row([self.dd_corsi, self.btn_cerca_iscritti],
+                          alignment= ft.MainAxisAlignment.CENTER)
+
+        self._page.controls.append(row_high)
+        # =======================================================================================================
 
         #ROW with some controls
         # text field for the name
